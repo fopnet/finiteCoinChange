@@ -59,8 +59,10 @@ public class FiniteCoinChange {
 
 
     void printChange(List<Coin> change) {
+        final String middleMessage = "%d moeda(s) de %d";
         StringBuilder msg = change.stream().reduce(new StringBuilder("O troco do cliente será: "),
-                (sb, it) ->  sb.append (new StringBuilder(String.format("%d moedas de %d", it.getAmount(), it.getValue())).append( " e ")),
+                (sb, it) -> sb.append(
+                        new StringBuilder(String.format(middleMessage, it.getAmount(), it.getValue())).append(" e ")),
                 (sb1, sb2) -> sb1);
 
         logger.info(msg.substring(0, msg.toString().length() - 3));
